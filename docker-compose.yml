@@ -1,0 +1,26 @@
+---
+services:
+  healthnest-db:
+    image: mysql:8.0
+    container_name: healthnest-db
+    cap_add:
+      - SYS_NICE
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hnd
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    volumes:
+      - healthnest-db:/var/lib/mysql
+    networks:
+      - web
+
+#volume
+volumes:
+  healthnest-db:
+
+# Define networks
+networks:
+  web:
+    external: true
